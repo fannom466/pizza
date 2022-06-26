@@ -6,6 +6,11 @@ function Sort() {
   const[isVisible, setOpen] = useState(false);
   const[selected, setSelected] = useState(0);
   const list = ['популярности', 'цене','алфавиту'];
+  const onClickListItem = (i) => {
+  setSelected(i);
+  setOpen(false);
+
+  }
     return (
       <div className='sort'>
                 <div className='sort__label'>
@@ -22,7 +27,7 @@ function Sort() {
                     />
                   </svg>
                   <b>Сортировка по:</b>
-                  <span onClick={() =>{setOpen(!isVisible)}}>популярности</span>
+                  <span onClick={() =>{setOpen(!isVisible)}}>{list[selected]}</span>
                 </div>
                {isVisible &&(
                 <div className='sort__popup'>
@@ -30,11 +35,11 @@ function Sort() {
                   {
                                         list.map((name, i) => <li
                                         key={i} 
-                                        onClick={() => {setSelected(i)}} className={selected === i ? 'active' : ''}
+                                        onClick={() => {onClickListItem(i)}} className={selected === i ? 'active' : ''}
                                         >
                                         {name}
                                         </li>)
-      }
+                  }
                   </ul>
                 </div>
                )}
